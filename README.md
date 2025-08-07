@@ -61,9 +61,9 @@ sudo tcpdump -i eth1 vrrp
 sudo tcpdump -i eth1 host 224.0.0.18
  ```
 
-# WARNING
-# If you want to perform VIP and DB failover only in case of server or network failure.
-# change keepalived.conf at BACKUP(standby master) node.
+## WARNING
+If you want to perform VIP and DB failover only in case of server or network failure. <br>
+change keepalived.conf at BACKUP(standby master) node.<br>
  ```
 vrrp_instance VI_1 {
     ..
