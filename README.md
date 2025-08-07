@@ -33,7 +33,7 @@ DB_HOST="whpg-m"     # 호스트 (또는 IP 주소)
 DB_PORT="5432"       # 포트
 DB_USER="gpadmin" 
 VIP 192.168.56.100
-COORDINATOR_DATA_DIRECTORY
+COORDINATOR_DATA_DIRECTORY=/data/master/gpseg-1
 and so on.
 ```
 ### Change Owner and Permission
