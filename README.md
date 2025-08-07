@@ -1,15 +1,15 @@
->> This repo is for HA for WarehousePG Coordinator node.
+> This repo is for HA for WarehousePG Coordinator node.
 
-# setup keepalived at master and standby Master
+> setup keepalived at master and standby Master
 sudo dnf install -y keepalived 
 
 echo "net.ipv4.ip_forward = 1" | sudo tee -a /etc/sysctl.conf
 echo "net.ipv4.ip_nonlocal_bind = 1" | sudo tee -a /etc/sysctl.conf # Allow VIP to not be bound locally
 sudo sysctl -p 
 
-# Allow VRRP protocol if firewall using
+> Allow VRRP protocol if firewall using
 sudo firewall-cmd --permanent --add-rich-rule='rule protocol value="vrrp" accept'
-# Allow specific multicast addresses (VRRP uses 224.0.0.18 multicast) if firewall using
+> Allow specific multicast addresses (VRRP uses 224.0.0.18 multicast) if firewall using
 sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" destination address="224.0.0.18" protocol="vrrp" accept'
 sudo firewall-cmd --reload # Reload the firewall to apply the changes
 
