@@ -13,9 +13,9 @@ DB_USER="gpadmin"    # 접속할 사용자 (권한이 있는 사용자)
 #logger "$TIMESTAMP INFO: [$HOSTNAME] Keepalived starting check WHPG Status" 
 
 # pg_isready 명령 실행
-RETURN=`/usr/local/gpdb/bin/pg_isready -h "$DB_HOST" -d postgres -p "$DB_PORT" -U "$DB_USER" -t 1`
+RETURN=`/usr/local/greenplum-db/bin/pg_isready -h "$DB_HOST" -d postgres -p "$DB_PORT" -U "$DB_USER" -t 1`
 ROLE=$(echo "$RETURN" | awk '{print $NF}')
-/usr/local/gpdb/bin/pg_isready -h "$DB_HOST" -d postgres -p "$DB_PORT" -U "$DB_USER" -t 1 -q
+/usr/local/greenplum-db/bin/pg_isready -h "$DB_HOST" -d postgres -p "$DB_PORT" -U "$DB_USER" -t 1 -q
 
 # pg_isready의 종료 코드 확인
 # 0 :  마스터로서 정상 상태임          whpg-m:5432 - accepting connections
