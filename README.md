@@ -9,17 +9,17 @@ echo "net.ipv4.ip_nonlocal_bind = 1" | sudo tee -a /etc/sysctl.conf # Allow VIP 
 sudo sysctl -p
  ```
 
-> Allow VRRP protocol if firewall using <br>
+Allow VRRP protocol if firewall using <br>
  ```
 sudo firewall-cmd --permanent --add-rich-rule='rule protocol value="vrrp" accept'
  ```
-> Allow specific multicast addresses (VRRP uses 224.0.0.18 multicast) if firewall using <br>
+Allow specific multicast addresses (VRRP uses 224.0.0.18 multicast) if firewall using <br>
  ```
 sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" destination address="224.0.0.18" protocol="vrrp" accept'
 sudo firewall-cmd --reload # Reload the firewall to apply the changes
  ```
 
-## folder / file
+## folder / files
  ```
 /etc/keepalived/keepalived.conf    <- 
 /etc/keepalived/check_my_service.sh
