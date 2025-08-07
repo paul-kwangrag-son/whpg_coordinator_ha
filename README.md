@@ -27,6 +27,12 @@ sudo firewall-cmd --reload # Reload the firewall to apply the changes
 /etc/keepalived/notify_state_change.sh
 /etc/keepalived/notify_stop.sh
  ```
+### change scripts
+
+VIP 192.168.56.100
+COORDINATOR_DATA_DIRECTORY
+and so on.
+
 ### Change Owner and Permission
  ```
 sudo chmod +x /etc/keepalived/*.sh
