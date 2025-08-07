@@ -1,6 +1,6 @@
 ## This repo is for HA for WarehousePG Coordinator node.
 
-## setup keepalived at master and standby Master
+### setup keepalived at master and standby Master
  ```
 sudo dnf install -y keepalived 
 
@@ -19,7 +19,7 @@ sudo firewall-cmd --permanent --add-rich-rule='rule family="ipv4" destination ad
 sudo firewall-cmd --reload # Reload the firewall to apply the changes
  ```
 
-## folder / files
+### folder / files
  ```
 /etc/keepalived/keepalived.conf    <- 
 /etc/keepalived/check_my_service.sh
@@ -27,31 +27,30 @@ sudo firewall-cmd --reload # Reload the firewall to apply the changes
 /etc/keepalived/notify_state_change.sh
 /etc/keepalived/notify_stop.sh
  ```
-## Change Owner and Permission
+### Change Owner and Permission
  ```
 sudo chmod +x /etc/keepalived/*.sh
 sudo chown gpadmin:gpadmin /etc/keepalived/*
  ```
 
-## Start Keepalived Service
+### Start Keepalived Service
  ```
 sudo systemctl enable keepalived
 sudo systemctl start keepalived
  ```
-## Check Keepalived Service 
+### Check Keepalived Service 
  ```
 sudo systemctl status keepalived
 sudo journalctl -u keepalived -f
 sudo tail -f /var/log/messages | grep Keepalived
  ```
-## Check VIP 
+### Check VIP 
  ```
 nmcli connection show
 ip a
 ip a show [InterfaceName]
  ```
-
-## Check VRRP Packet
+### Check VRRP Packet
  ```
 sudo tcpdump -i [InterfaceName] vrrp
 sudo tcpdump -i [InterfaceName] host 224.0.0.18
@@ -61,7 +60,7 @@ sudo tcpdump -i eth1 vrrp
 sudo tcpdump -i eth1 host 224.0.0.18
  ```
 
-## WARNING
+### WARNING
 If you want to perform VIP and DB failover only in case of server or network failure. <br>
 change keepalived.conf at BACKUP(standby master) node.<br>
  ```
