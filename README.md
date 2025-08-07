@@ -1,4 +1,4 @@
-# This repo is for HA for WarehousePG Coordinator node.
+## This repo is for HA for WarehousePG Coordinator node.
 
 # setup keepalived at master and standby Master
 sudo dnf install -y keepalived 
