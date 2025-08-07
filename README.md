@@ -1,6 +1,6 @@
-> This repo is for HA for WarehousePG Coordinator node.
+## This repo is for HA for WarehousePG Coordinator node.
 
-> setup keepalived at master and standby Master
+## setup keepalived at master and standby Master
 sudo dnf install -y keepalived 
 
 echo "net.ipv4.ip_forward = 1" | sudo tee -a /etc/sysctl.conf
