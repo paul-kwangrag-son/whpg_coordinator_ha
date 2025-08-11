@@ -81,6 +81,16 @@ vrrp_instance VI_1 {
 
  ```
 
+### Keepalived RPM Dependency.
+```
+libnl: A library that uses the Netlink protocol. It is essential for keepalived to handle the network interface and routing table information required to send and receive VRRP (Virtual Router Redundancy Protocol) messages.
+libnfnetlink: A library used for features such as Netfilter connection tracking.
+libmnl: A low-level library for handling Netlink messages.
+openssl: An SSL/TLS protocol library. It may be required for keepalived's communication security or for certain authentication methods.
+systemd: Required for managing keepalived as a system service. Systemd is responsible for starting, stopping, and restarting the keepalived process.
+libcap: A library for process permissions management. It is used by keepalived to securely grant permissions for certain network operations.
+popt: A library for parsing command-line options. It is required for keepalived to process various command-line arguments.
+coreutils: A package containing core Linux utilities such as chown, chmod, and ln.
 
-
+```
 
