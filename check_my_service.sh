@@ -13,6 +13,7 @@ DB_USER="gpadmin"    # 접속할 사용자 (권한이 있는 사용자)
 #logger "$TIMESTAMP INFO: [$HOSTNAME] Keepalived starting check WHPG Status" 
 
 # pg_isready 명령 실행
+# -h: 호스트, -p: 포트, -U: 사용자, -q: 조용한 모드 (결과만 출력하고 추가 메시지 없음), # -t 1: 타임아웃 1초
 RETURN=`/usr/local/greenplum-db/bin/pg_isready -h "$DB_HOST" -d postgres -p "$DB_PORT" -U "$DB_USER" -t 1`
 RETURN_CODE=$?
 ROLE=$(echo "$RETURN" | awk '{print $NF}')
