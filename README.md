@@ -40,6 +40,7 @@ and so on.
  ```
 sudo chmod +x /etc/keepalived/*.sh
 sudo chown gpadmin:gpadmin /etc/keepalived/*
+sudo usermod -aG wheel gpadmin
  ```
 
 ### Start Keepalived Service
