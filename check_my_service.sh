@@ -14,8 +14,8 @@ DB_USER="gpadmin"    # 접속할 사용자 (권한이 있는 사용자)
 
 # pg_isready 명령 실행
 RETURN=`/usr/local/greenplum-db/bin/pg_isready -h "$DB_HOST" -d postgres -p "$DB_PORT" -U "$DB_USER" -t 1`
+RETURN_CODE=$?
 ROLE=$(echo "$RETURN" | awk '{print $NF}')
-/usr/local/greenplum-db/bin/pg_isready -h "$DB_HOST" -d postgres -p "$DB_PORT" -U "$DB_USER" -t 1 -q
 
 # pg_isready의 종료 코드 확인
 # 0 :  마스터로서 정상 상태임          whpg-m:5432 - accepting connections
@@ -26,11 +26,11 @@ ROLE=$(echo "$RETURN" | awk '{print $NF}')
 
 RETURN_CODE=$?
 if [[ $ROLE = "connections" && $RETURN_CODE -eq 0 ]]; then
-  #logger "$TIMESTAMP INFO: Keepalived $ROLE $RETURN_CODE 0"
-  exit 0
-#elif [[ $ROLE = "ready" && $RETURN_CODE -eq 64 ]]; then
-#  #logger "$TIMESTAMP INFO: Keepalived $ROLE $RETURN_CODE 0" 
-#  exit 0
+  #logger "$TIMESTAMP INFO: Keepalived $ROLE $RETURN_CODE Master Node"
+  exit 0    # if MASTER : 0, BACKUP : 1
+elif [[ $ROLE = "ready" && $RETURN_CODE -eq 64 ]]; then
+  #logger "$TIMESTAMP INFO: Keepalived $ROLE $RETURN_CODE Standby Node" 
+  exit 0    # if MASTER : 1, BACKUP : 0
 else
   #logger "$TIMESTAMP ERROR: Keepalived $ROLE $RETURN_CODE 1"
   exit 1
