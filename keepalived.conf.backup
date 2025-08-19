@@ -39,6 +39,12 @@ vrrp_instance VI_1 {
         auth_pass secretpw   # 인증 비밀번호 (두 노드 동일하게 설정)
     }
 
+    # -- Unicast 설정의 핵심 부분 --
+    #unicast_src_ip 192.168.10.12      # 자신의 IP 주소
+    #unicast_peer {
+    #    192.168.10.11                # 상대방(Master) 서버의 IP 주소
+    #}
+
     virtual_ipaddress {
         #192.168.56.100/24 dev eth1 label eth1:0    # 클라이언트가 접근할 가상 IP 주소 (VIP)
         192.168.56.100/24    # 클라이언트가 접근할 가상 IP 주소 (VIP)
