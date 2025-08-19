@@ -29,6 +29,7 @@ vrrp_instance VI_1 {
     interface eth1           # VRRP 패킷을 주고받을 네트워크 인터페이스 (실제 인터페이스명으로 변경)
     virtual_router_id 51     # VRRP 라우터 ID (이 클러스터 내에서 고유해야 함, 1-255)
     priority 98              # 이 노드의 우선순위 (Master Node를 2보다 높게 설정)
+    # max_auto_priority 120  # Failover 후 VIP를 가진 BACKUP 서버의 우선순위가 max_auto_priority 값 이상이면, MASTER는 VIP를 되찾아오지 않고 대기
 
     #nopreempt
     preempt                  # Master에서WHPG 종료로 priority가 BACKUP보다 낮아지면, 강제로 BACKUP 이 MASTET로 승격, WHPH Master 시작시킴
