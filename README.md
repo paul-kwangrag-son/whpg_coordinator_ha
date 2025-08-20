@@ -104,20 +104,20 @@ coreutils: A package containing core Linux utilities such as chown, chmod, and l
 
 ```
 
-### Failover Scenario
+### Scenario : Failover 
 ```
 if nopreempt mode in BACKUP, failover only at Server down, Interface down, except when DB down.
 if preempt mode in BACKUP, failover at Server down, Interface down and DB down.
 
-Failover means that BACKUP will be Master node of WarehousePG and VIP move to BACKUP also
+Failover means that BACKUP node will be Master node of WarehousePG and VIP also move to BACKUP node.
 
-check at BACKUP
+check at BACKUP node
  > sudo ip a
  > sudo systemctl status keepalived
  > gpstate 
 ```
 
-### Failback Scenario
+### Scenario : Failback 
 ```
 When failed node start up normaly, make it standby node of WarehousePG by following
 1. At failed node
@@ -125,12 +125,13 @@ When failed node start up normaly, make it standby node of WarehousePG by follow
 2. At Backup node( currently Master node of WarehousePG )
    gpinitstandby -s failed_node_ip
 ```
-### Return to Original State. 
+
+### Scenario : Return to Original state
 ```
 when master and standby is running, do following command.
 kill or pg_ctl -D $MASTER_DATA_DIRECTORY stop
 
-keepalived move VIP to original master node and run gpactivate. at original master node
+keepalived move VIP to original master node and run gpactivatestandby at original master node
 ```
 
 
