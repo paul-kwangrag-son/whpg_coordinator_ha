@@ -34,7 +34,7 @@ vrrp_instance VI_1 {
     #nopreempt
     preempt                  # Master에서WHPG 종료로 priority가 BACKUP보다 낮아지면, 강제로 BACKUP 이 MASTET로 승격, WHPH Master 시작시킴
 
-    advert_int 1             # VRRP 광고 간격 (초)
+    advert_int 1             # VRRP 광고 간격 (초), 실이 값의 3배 동안 광고 패킷을 받지 못할 때 장해로 인지합니다. 즉 3초 동안 대기함.
     authentication {
         auth_type AH         # 인증 방식 (PASS 또는 AH)
         auth_pass secretpw   # 인증 비밀번호 (두 노드 동일하게 설정)
