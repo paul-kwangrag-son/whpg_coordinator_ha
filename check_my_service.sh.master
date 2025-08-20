@@ -6,7 +6,7 @@ HOSTNAME=$(hostname)
 
 # DB 접속 정보 설정
 # 필요한 경우 환경 변수 또는 직접 지정 (예: -h 호스트 -p 포트 -U 사용자)
-DB_HOST="whpg-m"     # 호스트 (또는 IP 주소)
+DB_HOST="whpg-m"     # Master 호스트 (또는 IP 주소)
 DB_PORT="5432"       # 포트
 DB_USER="gpadmin"    # 접속할 사용자 (권한이 있는 사용자)
 
