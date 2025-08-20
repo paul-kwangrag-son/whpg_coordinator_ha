@@ -128,10 +128,14 @@ When failed node start up normaly, make it standby node of WarehousePG by follow
 
 ## Scenario : Return to Original state
 ```
-when master and standby is running, do following command.
-kill or pg_ctl -D $MASTER_DATA_DIRECTORY stop
+when master and standby is running, do following command at current Master node.
+kill -9 postgres_pid or pg_ctl -D $MASTER_DATA_DIRECTORY stop
+then, ..
+The keepalived move VIP to original master node and run gpactivatestandby at original master node
 
-keepalived move VIP to original master node and run gpactivatestandby at original master node
+and then
+make new standby node of WarehousePG at Master node.
+gpinitstandby -s backup_node
 ```
 
 
