@@ -3,7 +3,7 @@
 ### VRRP fail detect algorithm 
 
 
-|Category구분 | Failure Type장애 유형 | Detection Method감지 방식 | Failover Time페일오버시간 |
+|Category 구분 | Failure Type 장애 유형 | Detection Method 감지 방식 | Failover Time 페일오버시간 |
 -----|---------|---------|--------------|
 |타임아웃 방식	| 네트워크 장애 (패킷 유실) | 원격 노드(BACKUP)에서 타임아웃으로 감지 | 약 3초 (Master_Down_Interval) |
 |Timeout-based Method	| Network Failure (Packet Loss) | Detected by BACKUP via timeout | Approx. 3 seconds (Master_Down_Interval) |
