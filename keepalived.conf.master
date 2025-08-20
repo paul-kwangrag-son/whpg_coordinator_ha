@@ -32,7 +32,7 @@ vrrp_instance VI_1 {
 
     #nopreempt               # Priority 만 높다고 서비스(WGPG,VIP)를failover 하지 않음.
 
-    advert_int 1             # VRRP 광고 간격 (초)
+    advert_int 1             # VRRP 광고 간격 (초), 실이 값의 3배 동안 광고 패킷을 받지 못할 때 장해로 인지합니다. 즉 3초 동안 대기함.
     authentication {
         auth_type AH         # 인증 방식 (PASS 또는 AH)
         auth_pass secretpw   # Node 1과 동일한 비밀번호
