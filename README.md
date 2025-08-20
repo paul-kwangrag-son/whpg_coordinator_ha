@@ -123,9 +123,9 @@ if preempt mode in BACKUP, failover at Server down, Interface down and DB down.
 Failover means that BACKUP node will be Master node of WarehousePG and VIP also move to BACKUP node.
 
 check at BACKUP node
- > sudo ip a
- > sudo systemctl status keepalived
- > gpstate 
+ $ sudo ip a
+ $ sudo systemctl status keepalived
+ $ gpstate 
 ```
 
 ## Scenario : Failback 
@@ -134,19 +134,22 @@ When failed node start up normaly, make it standby node of WarehousePG by follow
 1. At failed node
    check $MASTER_DATA_DIRECTORY, and rm -rf $MASTER_DATA_DIRECTORY or mv $MASTER_DATA_DIRECTORY $MASTER_DATA_DIRECTORY.org
 2. At Backup node( currently Master node of WarehousePG )
-   gpinitstandby -s failed_node_ip
+   $ gpinitstandby -s failed_node_ip
 ```
 
 ## Scenario : Return to Original state
 ```
 when master and standby is running, do following command at current Master node.
-kill -9 postgres_pid or pg_ctl -D $MASTER_DATA_DIRECTORY stop
+$ kill -9 postgres_pid
+or
+$ pg_ctl -D $MASTER_DATA_DIRECTORY stop
+
 then, ..
 The keepalived move VIP to original master node and run gpactivatestandby at original master node
 
 and then
 make new standby node of WarehousePG at Master node.
-gpinitstandby -s backup_node
+$ gpinitstandby -s backup_node
 ```
 
 
