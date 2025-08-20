@@ -19,7 +19,7 @@ global_defs {
 vrrp_script chk_service_health {
     script "/etc/keepalived/check_my_service.sh" # 서비스 상태 체크 스크립트
     interval 1                                   # 1초마다 실행
-    weight 30                                    # 스크립트 실패 시 우선순위 30 감소, standby 가 정상인 경우 30 증가
+    weight 50                                    # 스크립트 실패 시 우선순위 30 감소, standby 가 정상인 경우 30 증가
     fall 3                                       # 3회 실패 시 FAULT 상태로 전환
     rise 1                                       # 1회 성공 시 다시 정상 상태로 전환
 }
