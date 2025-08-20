@@ -7,7 +7,6 @@
 -----|---------|---------|--------------|
 |타임아웃 방식	| 네트워크 장애 (패킷 유실) | 원격 노드(BACKUP)에서 타임아웃으로 감지 | 약 3초 (Master_Down_Interval) |
 |Timeout-based Method	| Network Failure (Packet Loss) | Detected by BACKUP via timeout | Approx. 3 seconds (Master_Down_Interval) |
------|---------|---------|--------------|
 |이벤트 방식 | 서버 다운, 인터페이스 장애 | 로컬 노드(MASTER)에서 이벤트로 직접 감지 | 즉시 (거의 0초) |
 |Event-based Method | Server/Interface Failure | Direct event detection on MASTER | Immediate (Near-zero seconds) |
 
