@@ -64,10 +64,19 @@ ip a show [InterfaceName]
  ```
 sudo tcpdump -i [InterfaceName] vrrp
 sudo tcpdump -i [InterfaceName] host 224.0.0.18
+sudo tcpdump -i [InterfaceName] -n "proto 112"
 
-ex) 
+ex)
 sudo tcpdump -i eth1 vrrp
 sudo tcpdump -i eth1 host 224.0.0.18
+sudo tcpdump -i eth1 -n "proto 112"
+
+# 상대방 노드 IP를 목적지로 하는 VRRP 패킷 확인
+sudo tcpdump -i <interface> -n "dst host <peer_ip_address> and proto 112"
+sudo tcpdump -i eth1 -n "dst host 192.168.56.42 and proto 112"
+# 멀티캐스트 주소를 목적지로 하는 패킷 확인
+sudo tcpdump -i <interface> -n "dst host 224.0.0.18"
+sudo tcpdump -i eth1 -n "dst host 224.0.0.18"
  ```
 
 ### WARNING
