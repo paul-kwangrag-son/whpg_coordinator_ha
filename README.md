@@ -21,8 +21,8 @@ sudo firewall-cmd --reload # Reload the firewall to apply the changes
 
 ### folder / files
  ```
-/etc/keepalived/keepalived.conf    # keepalived.conf.master for MASTER, keepalived.conf.backup for BACKUP
-/etc/keepalived/check_my_service.sh
+/etc/keepalived/keepalived.conf     # keepalived.conf.master for MASTER, keepalived.conf.backup for BACKUP
+/etc/keepalived/check_my_service.sh # check_my_service.sh.master for MASTER, check_my_service.sh.backup for BACKUP
 /etc/keepalived/notify_master.sh
 /etc/keepalived/notify_state_change.sh
 /etc/keepalived/notify_stop.sh
