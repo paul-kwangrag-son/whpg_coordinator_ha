@@ -52,6 +52,9 @@ and so on.
 sudo chmod +x /etc/keepalived/*.sh
 sudo chown gpadmin:gpadmin /etc/keepalived/*
 sudo usermod -aG wheel gpadmin
+
+sudo visudo          # add below for gpadmin account. 
+gpadmin ALL=(gpadmin) NOPASSWD: /bin/bash
  ```
 
 ### Start Keepalived Service
