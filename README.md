@@ -40,8 +40,8 @@ sudo firewall-cmd --reload # Reload the firewall to apply the changes
  ```
 ### change scripts
 ```
-DB_HOST="whpg-m"     # 호스트 (또는 IP 주소)
-DB_PORT="5432"       # 포트
+DB_HOST="whpg-m"     # hostname (or IP address)
+DB_PORT="5432"       # port
 DB_USER="gpadmin" 
 VIP 192.168.56.100
 COORDINATOR_DATA_DIRECTORY=/data/master/gpseg-1
@@ -85,10 +85,10 @@ sudo tcpdump -i eth1 vrrp
 sudo tcpdump -i eth1 host 224.0.0.18
 sudo tcpdump -i eth1 -n "proto 112"
 
-# 상대방 노드 IP를 목적지로 하는 VRRP 패킷 확인
+# Unicast : check VRRP packet going to target IP
 sudo tcpdump -i <interface> -n "dst host <peer_ip_address> and proto 112"
 sudo tcpdump -i eth1 -n "dst host 192.168.56.42 and proto 112"
-# 멀티캐스트 주소를 목적지로 하는 패킷 확인
+# Multicast : check VRRP packet going to multicast Address
 sudo tcpdump -i <interface> -n "dst host 224.0.0.18"
 sudo tcpdump -i eth1 -n "dst host 224.0.0.18"
  ```
