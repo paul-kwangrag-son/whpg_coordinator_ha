@@ -31,8 +31,8 @@ vrrp_instance VI_1 {
     priority 98              # 이 노드의 우선순위 (Master Node를 2보다 높게 설정)
     # max_auto_priority 120  # Failover 후 VIP를 가진 BACKUP 서버의 우선순위가 max_auto_priority 값 이상이면, MASTER는 VIP를 되찾아오지 않고 대기
 
-    #nopreempt
-    preempt                  # Master에서WHPG 종료로 priority가 BACKUP보다 낮아지면, 강제로 BACKUP 이 MASTET로 승격, WHPH Master 시작시킴
+    #nopreempt               # Priority 가 높다고 Failover 되지 않음. vrrp packet 이 정상적으로 오면. 상태 유지.
+    preempt                  # Priority 높은 노드가 Master
 
     advert_int 1             # VRRP 광고 간격 (초), 실이 값의 3배 동안 광고 패킷을 받지 못할 때 장해로 인지합니다. 즉 3초 동안 대기함.
     authentication {
