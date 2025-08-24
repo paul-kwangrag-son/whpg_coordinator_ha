@@ -73,6 +73,8 @@ sudo tail -f /var/log/messages | grep Keepalived
 nmcli connection show
 ip a
 ip a show [InterfaceName]
+
+while true; do /usr/local/gpdb/bin/pg_isready -h <VIP> -d postgres -p 5432 -U gpadmin -t 1; date; echo ---------------------; sleep 1; done
  ```
 ### Check VRRP Packet
  ```
@@ -131,7 +133,7 @@ check at BACKUP node
  $ gpstate 
 ```
 
-## Scenario : Failback 
+## Scenario : Restore Failed Node 
 ```
 When failed node start up normaly, make it standby node of WarehousePG by following
 1. At failed node
@@ -140,7 +142,7 @@ When failed node start up normaly, make it standby node of WarehousePG by follow
    $ gpinitstandby -s failed_node_ip
 ```
 
-## Scenario : Return to Original state
+## Scenario : Failback, return to original state
 ```
 when master and standby is running, do following command at current Master node.
 $ kill -9 postgres_pid
