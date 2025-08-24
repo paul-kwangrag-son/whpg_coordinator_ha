@@ -11,6 +11,10 @@ VRRP(Virtual Router Redundancy Protocol)는 네트워크의 **고가용성(High 
 |Event-based Method | Server/Interface Failure | Direct event detection on MASTER | Immediate (Near-zero seconds) |
 |이벤트 방식 | 서버 다운, 인터페이스 장애 | 로컬 노드(MASTER)에서 이벤트로 직접 감지 | 즉시 (거의 0초) |
 
+![Scenario Stage 1/2](img/Stage1_2.png)
+![Scenario Stage 3/4](img/Stage3_4.png)
+![Scenario Stage 5](img/Stage5.png)
+
 ### setup keepalived at master and standby Master
  ```
 sudo dnf install -y keepalived 
