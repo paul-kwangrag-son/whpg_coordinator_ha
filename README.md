@@ -85,15 +85,17 @@ while true; do /usr/local/gpdb/bin/pg_isready -h <VIP> -d postgres -p 5432 -U gp
 sudo tcpdump -i [InterfaceName] vrrp
 sudo tcpdump -i [InterfaceName] host 224.0.0.18
 sudo tcpdump -i [InterfaceName] -n "proto 112"
+sudo tcpdump -i [InterfaceName] -n "proto 51"  # for IPsec AH 사용시.
 
 ex)
 sudo tcpdump -i eth1 vrrp
 sudo tcpdump -i eth1 host 224.0.0.18
 sudo tcpdump -i eth1 -n "proto 112"
+sudo tcpdump -i eth1 -n "proto 51" 
 
 # Unicast : check VRRP packet going to target IP
 sudo tcpdump -i <interface> -n "dst host <peer_ip_address> and proto 112"
-sudo tcpdump -i eth1 -n "dst host 192.168.56.42 and proto 112"
+sudo tcpdump -i eth1 -n "dst host 192.168.56.42 and proto 51"  # for IPsec AH 사용시.
 # Multicast : check VRRP packet going to multicast Address
 sudo tcpdump -i <interface> -n "dst host 224.0.0.18"
 sudo tcpdump -i eth1 -n "dst host 224.0.0.18"
