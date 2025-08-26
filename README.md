@@ -79,7 +79,7 @@ nmcli connection show
 ip a
 ip a show [InterfaceName]
 
-while true; do /usr/local/gpdb/bin/pg_isready -h <VIP> -d postgres -p 5432 -U gpadmin -t 1; date; echo ---------------------; sleep 1; done
+while true; do /usr/local/greenplum-db/bin/pg_isready -h <VIP> -d postgres -p 5432 -U gpadmin -t 1; date; echo ---------------------; sleep 1; done
  ```
 ### Check VRRP Packet
  ```
