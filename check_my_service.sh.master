@@ -27,13 +27,13 @@ ROLE=$(echo "$RETURN" | awk '{print $NF}')
 # 3 : 잘못된 인수 (오류)                     whpg-m0:5432 - no attempt
 
 if [[ $ROLE = "connections" && $RETURN_CODE -eq 0 ]]; then
-  #logger "$TIMESTAMP DEBUG: Keepalived $ROLE $RETURN_CODE Master Node"
-  exit 0    # if MASTER : 0, BACKUP : 1
+  #logger "$TIMESTAMP DEBUG: Keepalived $RETURN $RETURN_CODE"
+  exit 0    
 elif [[ $ROLE = "ready" && $RETURN_CODE -eq 64 ]]; then
-  #logger "$TIMESTAMP DEBUG: Keepalived $ROLE $RETURN_CODE Standby Node" 
-  exit 1    # if MASTER : 1, BACKUP : 0
+  #logger "$TIMESTAMP DEBUG: Keepalived $RETURN $RETURN_CODE" 
+  exit 1   
 else
-  #logger "$TIMESTAMP ERROR: Keepalived $ROLE $RETURN_CODE"
+  #logger "$TIMESTAMP ERROR: Keepalived $RETURN $RETURN_CODE"
   exit 1
 fi
 
