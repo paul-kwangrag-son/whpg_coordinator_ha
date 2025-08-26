@@ -36,15 +36,15 @@ vrrp_instance VI_1 {
 
     advert_int 1             # VRRP 광고 간격 (초), 실이 값의 3배 동안 광고 패킷을 받지 못할 때 장해로 인지합니다. 즉 3초 동안 대기함.
     authentication {
-        auth_type AH         # 인증 방식 (PASS 또는 AH)
+        auth_type PASS         # 인증 방식 (PASS 또는 AH)
         auth_pass secretpw   # 인증 비밀번호 (두 노드 동일하게 설정)
     }
 
     # -- Unicast 설정의 핵심 부분 --
-    #unicast_src_ip 192.168.10.12      # 자신의 IP 주소
-    #unicast_peer {
-    #    192.168.10.11                # 상대방(Master) 서버의 IP 주소
-    #}
+    unicast_src_ip 192.168.10.12      # 자신의 IP 주소
+    unicast_peer {
+        192.168.10.11                # 상대방(Master) 서버의 IP 주소
+    }
 
     virtual_ipaddress {
         #192.168.56.100/24 dev eth1 label eth1:0    # 클라이언트가 접근할 가상 IP 주소 (VIP)
@@ -58,5 +58,6 @@ vrrp_instance VI_1 {
     notify_master "/etc/keepalived/notify_master.sh MASTER"
     notify_backup "/etc/keepalived/notify_state_change.sh BACKUP"
     #notify_fault "/etc/keepalived/notify_state_change.sh FAULT"
-    notify_stop "/etc/keepalived/notify_stop.sh BACKUP"
+    notify_stop "/etc/keepalived/notify_state_change.sh STOP"
+    #notify_stop "/etc/keepalived/notify_stop.sh BACKUP"
 }
