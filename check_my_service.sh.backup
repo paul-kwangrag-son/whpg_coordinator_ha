@@ -16,6 +16,7 @@ DB_USER="gpadmin"    # 접속할 사용자 (권한이 있는 사용자)
 # -h: 호스트, -p: 포트, -U: 사용자, -q: 조용한 모드 (결과만 출력하고 추가 메시지 없음), # -t 1: 타임아웃 1초
 RETURN=`/usr/local/greenplum-db/bin/pg_isready -h "$DB_HOST" -d postgres -p "$DB_PORT" -U "$DB_USER" -t 1`
 RETURN_CODE=$?
+logger "DEBUG: $RETURN $RETURN_CODE"
 ROLE=$(echo "$RETURN" | awk '{print $NF}')
 
 # pg_isready의 종료 코드 확인
@@ -25,15 +26,14 @@ ROLE=$(echo "$RETURN" | awk '{print $NF}')
 # 2 : 응답 없음 (서버 다운 또는 네트워크 문제)
 # 3 : 잘못된 인수 (오류)                     whpg-m0:5432 - no attempt
 
-RETURN_CODE=$?
 if [[ $ROLE = "connections" && $RETURN_CODE -eq 0 ]]; then
-  #logger "$TIMESTAMP INFO: Keepalived $ROLE $RETURN_CODE Master Node"
+  #logger "$TIMESTAMP DEBUG: Keepalived $ROLE $RETURN_CODE Master Node"
   exit 0    
 elif [[ $ROLE = "ready" && $RETURN_CODE -eq 64 ]]; then
-  #logger "$TIMESTAMP INFO: Keepalived $ROLE $RETURN_CODE Standby Node" 
+  #logger "$TIMESTAMP DEBUG: Keepalived $ROLE $RETURN_CODE Standby Node" 
   exit 0   
 else
-  #logger "$TIMESTAMP ERROR: Keepalived $ROLE $RETURN_CODE 1"
+  #logger "$TIMESTAMP ERROR: Keepalived $ROLE $RETURN_CODE"
   exit 1
 fi
 
