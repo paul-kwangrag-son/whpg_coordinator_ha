@@ -33,7 +33,7 @@ elif [[ $ROLE = "ready" && $RETURN_CODE -eq 64 ]]; then
   #logger "$TIMESTAMP DEBUG: Keepalived $RETURN $RETURN_CODE" 
   exit 1   
 else
-  #logger "$TIMESTAMP ERROR: Keepalived $RETURN $RETURN_CODE"
+  #logger "$TIMESTAMP DEBUG: Keepalived $RETURN $RETURN_CODE"
   exit 1
 fi
 
