@@ -1,5 +1,5 @@
 #!/bin/bash
-# /etc/keepalived/check_my_service.sh
+#/etc/keepalived/check_my_service.sh
 
 TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
 HOSTNAME=$(hostname)
