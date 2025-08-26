@@ -4,7 +4,7 @@
 
 TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
 HOSTNAME=$(hostname)
-CURRENT_STATE="$1" # MASTER, BACKUP, FAULT
+CURRENT_STATE="$1" # MASTER, BACKUP, STOP
 
 logger "$TIMESTAMP INFO: [$HOSTNAME] Keepalived state changed to $CURRENT_STATE by notify_state_change.sh"
 
