@@ -40,10 +40,10 @@ vrrp_instance VI_1 {
     }
 
     # -- Unicast 설정의 핵심 부분 --
-    #unicast_src_ip 192.168.10.11      # 자신의 IP 주소
-    #unicast_peer {
-    #    192.168.10.12                # 상대방(Backup) 서버의 IP 주소
-    #}
+    unicast_src_ip 192.168.10.11      # 자신의 IP 주소
+    unicast_peer {
+        192.168.10.12                # 상대방(Backup) 서버의 IP 주소
+    }
 
     virtual_ipaddress {
         #192.168.56.100/24 dev eth1 label eth1:0  # 클라이언트가 접근할 가상 IP 주소 (VIP) - Node 1과 동일
@@ -57,5 +57,6 @@ vrrp_instance VI_1 {
     notify_master "/etc/keepalived/notify_master.sh MASTER"
     notify_backup "/etc/keepalived/notify_state_change.sh BACKUP"
     #notify_fault "/etc/keepalived/notify_state_change.sh FAULT"
-    notify_stop "/etc/keepalived/notify_stop.sh BACKUP"
+    notify_stop "/etc/keepalived/notify_state_change.sh STOP"
+    #notify_stop "/etc/keepalived/notify_stop.sh BACKUP"
 }
