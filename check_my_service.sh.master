@@ -26,7 +26,6 @@ ROLE=$(echo "$RETURN" | awk '{print $NF}')
 # 2 : 응답 없음 (서버 다운 또는 네트워크 문제)
 # 3 : 잘못된 인수 (오류)                     whpg-m0:5432 - no attempt
 
-RETURN_CODE=$?
 if [[ $ROLE = "connections" && $RETURN_CODE -eq 0 ]]; then
   #logger "$TIMESTAMP DEBUG: Keepalived $ROLE $RETURN_CODE Master Node"
   exit 0    # if MASTER : 0, BACKUP : 1
