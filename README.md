@@ -65,6 +65,7 @@ gpadmin ALL=(gpadmin) NOPASSWD: /bin/bash
  ```
 sudo systemctl enable keepalived
 sudo systemctl start keepalived
+sudo systemctl reload keepalived    # after change configuration of keepalived
  ```
 ### Check Keepalived Service 
  ```
