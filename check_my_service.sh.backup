@@ -21,11 +21,11 @@ RETURN_CODE=$?
 ROLE=$(echo "$RETURN" | awk '{print $NF}')
 
 # Check the exit code of pg_isready
-# 0: Master is in good condition whpg-m:5432 - accepting connections
-# 64: Master is in good condition whpg-sm:5432 - mirror ready
-# 1: Server is refusing connections (starting, pg_hba.conf issue, etc.)
-# 2: No response (server down or network issue)
-# 3: Invalid argument (error)     mis-hostname:5432 - no attempt
+# 0 : Master is in good condition whpg-m:5432 - accepting connections
+# 64 : Master is in good condition whpg-sm:5432 - mirror ready
+# 1 : Server is refusing connections (starting, pg_hba.conf issue, etc.)
+# 2 : No response (server down or network issue)
+# 3 : Invalid argument (error)     mis-hostname:5432 - no attempt
 
 if [[ $ROLE = "connections" && $RETURN_CODE -eq 0 ]]; then
   #logger "$TIMESTAMP DEBUG1: Keepalived $RETURN $RETURN_CODE"
