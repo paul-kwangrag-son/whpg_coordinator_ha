@@ -1,15 +1,15 @@
 ! Configuration File for keepalived
 
 global_defs {
-    router_id whpg-s               # 각 서버마다 고유한 ID (호스트 이름 등으로 설정 권장)
-    script_user gpadmin            # 스크립트를 이 사용자로 실행합니다.
+    router_id whpg-s               # Unique ID for each server (recommended to be set to host name, etc.)
+    script_user gpadmin            # Run the script as this user.
     # notification_email {
     #   admin@example.com
     # }
     # notification_email_from keepalived@example.com
     # smtp_server 127.0.0.1
     # smtp_connect_timeout 30
-    enable_script_security         # 스크립트 실행 보안 강화 (권장)
+    enable_script_security         # Enhance script execution security (recommended)
     # vrrp_skip_check_adv_addr
     # vrrp_strict
     # vrrp_garp_interval 0
@@ -17,38 +17,40 @@ global_defs {
 }
 
 vrrp_script chk_service_health {
-    script "/etc/keepalived/check_my_service.sh" # 서비스 상태 체크 스크립트
-    interval 1                                   # 1초마다 실행
-    weight 50                                    # 스크립트 실패 시 우선순위 30 감소, standby 가 정상인 경우 30 증가
-    fall 3                                       # 3회 실패 시 FAULT 상태로 전환
-    rise 1                                       # 1회 성공 시 다시 정상 상태로 전환
+script "/etc/keepalived/check_my_service.sh"       # Service status check script
+interval 1                                         # Runs every second
+weight 50           # If the script fails, the priority decreases by 30. If the standby is normal, the priority increases by 30.
+fall 3              # If it fails three times, it switches to FAULT status.
+rise 1              # If it succeeds once, it switches back to NORMAL status.
 }
 
 vrrp_instance VI_1 {
-    state BACKUP             # 이 노드의 초기 상태: BACKUP or MASTER
-    interface eth1           # VRRP 패킷을 주고받을 네트워크 인터페이스 (실제 인터페이스명으로 변경)
-    virtual_router_id 51     # VRRP 라우터 ID (이 클러스터 내에서 고유해야 함, 1-255)
-    priority 98              # 이 노드의 우선순위 (Master Node를 2보다 높게 설정)
-    # max_auto_priority 120  # Failover 후 VIP를 가진 BACKUP 서버의 우선순위가 max_auto_priority 값 이상이면, MASTER는 VIP를 되찾아오지 않고 대기
+    state BACKUP            # This node's initial state: BACKUP or MASTER
+    interface eth1          # Network interface to send and receive VRRP packets (replace with the actual interface name)
+    virtual_router_id 51    # VRRP router ID (must be unique within this cluster, 1-255)
+    priority 98             # This node's priority (set the Master Node higher than 2)
+    # max_auto_priority 120 # If the priority of the BACKUP server with the VIP after failover is greater than max_auto_priority, the MASTER will not retrieve the VIP and will wait.
 
-    #nopreempt               # Priority 가 높다고 Failover 되지 않음. vrrp packet 이 정상적으로 오면. 상태 유지.
-    preempt                  # Priority 높은 노드가 Master
+    #nopreempt              # High priority does not cause failover. If VRRP packets arrive normally, the state will remain.
+    preempt                 # The node with the highest priority becomes the Master.
 
-    advert_int 1             # VRRP 광고 간격 (초), 실이 값의 3배 동안 광고 패킷을 받지 못할 때 장해로 인지합니다. 즉 3초 동안 대기함.
+    advert_int 1            # VRRP advertisement interval (in seconds). 
+                            # If no advertisement packets are received for three times the actual value, a failure is detected. 
+                            # This means the node will wait for 3 seconds. 
     authentication {
-        auth_type PASS         # 인증 방식 (PASS 또는 AH)
-        auth_pass secretpw   # 인증 비밀번호 (두 노드 동일하게 설정)
+       auth_type PASS       # Authentication method (PASS or AH)
+       auth_pass secretpw   # Authentication password (set the same on both nodes)
     }
 
-    # -- Unicast 설정의 핵심 부분 --
-    unicast_src_ip 192.168.10.12      # 자신의 IP 주소
+    # -- Core parts of Unicast setup --
+    unicast_src_ip 192.168.10.12      # Your IP address
     unicast_peer {
-        192.168.10.11                # 상대방(Master) 서버의 IP 주소
+        192.168.10.11                # IP address of the other party (Master) server
     }
 
     virtual_ipaddress {
-        #192.168.56.100/24 dev eth1 label eth1:0    # 클라이언트가 접근할 가상 IP 주소 (VIP)
-        192.168.56.100/24    # 클라이언트가 접근할 가상 IP 주소 (VIP)
+        #192.168.56.100/24 dev eth1 label eth1:0    # Virtual IP address (VIP) that clients will access
+        192.168.56.100/24                           # Virtual IP address (VIP) that clients will access
     }
 
     track_script {
